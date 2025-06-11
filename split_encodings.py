@@ -16,7 +16,7 @@ for encoding, meta in zip(data["encodings"], data["metadata"]):
     grouped[key]["encodings"].append(encoding)
     grouped[key]["metadata"].append(meta)
 
-# Create output directory
+# Create an output directory
 os.makedirs("split_encodings", exist_ok=True)
 
 # Save separate pickle files

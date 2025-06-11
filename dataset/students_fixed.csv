@@ -1,6 +1,8 @@
-﻿roll_no,name,semester,branch,section,image_path
-1,Malhar,3,CE,A,dataset/1_Malhar.jpg
-2,Harsh,5,CSE,A,dataset/2_Harsh.jpg
-3,Meet,1,CE,A,dataset/3_Meet.jpg
-4,Umang,3,CSE,A,dataset/4_Umang.jpg
-5,Sumeet,5,CE,A,dataset/5_Sumeet.jpg
+roll_no,name,semester,branch,section,image_path
+1.0,Malhar,3,CE,A,dataset/1_Malhar.jpg
+2.0,Harsh,5,CSE,A,dataset/2_Harsh.jpg
+3.0,Meet,1,CE,A,dataset/3_Meet.jpg
+4.0,Umang,3,CSE,A,dataset/4_Umang.jpg
+5.0,Sumeet,5,CE,A,dataset/5_Sumeet.jpg
+Malhar,8,1,CE,A,dataset\Malhar_8.jpg
+Malhar,8,1,CE,A,dataset\Malhar_8.jpg
