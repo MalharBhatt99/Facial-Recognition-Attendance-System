@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Theme Backgrounds */
+body.light {
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: black;
+}
+
+body.dark {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: white;
+}
+
+/* LOGIN CONTAINER */
+.login-container {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  animation: slideDown 0.5s ease;
+  transition: background 0.5s, color 0.5s;
+}
+
+body.dark .login-container {
+  background: #1e1e1e;
+  color: white;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FORM ELEMENTS */
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+}
+
+input[type="submit"] {
+  background-color: #4facfe;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #00c6fb;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.brand {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #4facfe;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: gray;
+  margin-bottom: 10px;
+}
+
+.remember input {
+  margin-right: 5px;
+}
+
+/* THEME TOGGLE BUTTON */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.theme-toggle button {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* NEW FADE OVERLAY FOR THEME SWITCH */
+.fade-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.fade-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.theme-switch {
+  width: 60px;
+  height: 30px;
+  background: #ccc;
+  border-radius: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  cursor: pointer;
+  transition: background 0.4s ease;
+}
+
+.theme-switch .icon {
+  font-size: 14px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.toggle-circle {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transition: left 0.4s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+/* When in dark mode */
+body.dark .theme-switch {
+  background: #4facfe;
+}
+
+body.dark .toggle-circle {
+  left: 33px;
+}

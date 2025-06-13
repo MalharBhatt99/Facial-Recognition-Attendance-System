@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | FaceMark Pro</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style_baloo.css') }}">
+
+
+</head>
+<body class="light">
+  <div class="fade-overlay" id="fadeOverlay"></div>
+
+  <div class="theme-toggle">
+    <div class="theme-switch" onclick="toggleDarkMode()">
+      <span class="icon sun">☀️</span>
+      <span class="icon moon">🌙</span>
+      <div class="toggle-circle" id="toggleCircle"></div>
+    </div>
+  </div>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">FaceMark Pro</div>
+      <p>👋 Welcome, <strong>{{ faculty }}</strong></p>
+      <ul class="nav-links">
+        <li>📅 Timetable</li>
+        <li>🧾 Today’s Classes</li>
+        <li>📊 Attendance</li>
+        <li>⚙️ Settings</li>
+        <li>🚪 <a href="/logout">Logout</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Grid Layout -->
+    <main class="main-grid">
+
+      <!-- Timetable -->
+      <div class="block timetable-block">
+        <h3>📅 Weekly Timetable</h3>
+        <table class="timetable">
+          <thead>
+            <tr>
+              <th>Day / Time</th>
+              {% for time in time_slots %}
+                <th>{{ time }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for day in days %}
+              <tr>
+                <td><strong>{{ day }}</strong></td>
+                {% for time in time_slots %}
+                  <td>
+                    {% set slot = timetable.get((day, time)) %}
+                    {% if slot %}
+                      <div class="slot">
+                        <div><strong>{{ slot.subject }}</strong></div>
+                        <div>{{ slot.classroom }}</div>
+                      </div>
+                    {% else %}
+                      —
+                    {% endif %}
+                  </td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+     <!-- Lecture Slider Container -->
+      <div class="lecture-slide-container">
+        <div class="lecture-card current-card">
+          <h4>🕒 Current Lecture</h4>
+          {% set current = lectures | selectattr("status", "equalto", "current") | list %}
+          {% if current|length > 0 %}
+            {% set lec = current[0] %}
+            <p><strong>{{ lec.subject }}</strong></p>
+            <p>{{ lec.classroom }} | {{ lec.start_time }} - {{ lec.end_time }}</p>
+          {% else %}
+            <p>No class running now.</p>
+          {% endif %}
+        </div>
+
+        <div class="lecture-card next-card">
+          <h4>⏭️ Upcoming Lecture</h4>
+          {% set upcoming = lectures|selectattr("status", "equalto", "upcoming")|list %}
+          {% if upcoming %}
+            <p><strong>{{ upcoming[0].subject }}</strong></p>
+            <p>{{ upcoming[0].classroom }} | {{ upcoming[0].start_time }} - {{ upcoming[0].end_time }}</p>
+          {% else %}
+            <p>No upcoming class.</p>
+          {% endif %}
+        </div>
+      </div>
+
+
+
+      <!-- Attendance Graph -->
+      <div class="block graph-block">
+        <h4>📈 Attendance Summary</h4>
+        <canvas id="attendanceChart"></canvas>
+      </div>
+
+      <!-- Side Graphs -->
+      <div class="block side-graph1">
+        <h4>📊 Subject-wise Attendance</h4>
+        <canvas id="subjectChart"></canvas>
+      </div>
+
+      <div class="block side-graph2">
+        <h4>📌 Daily Trends</h4>
+        <canvas id="dailyChart"></canvas>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

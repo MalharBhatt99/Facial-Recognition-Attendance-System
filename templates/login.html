@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Faculty Login | FaceMark Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="light">
+  <div class="fade-overlay" id="fadeOverlay"></div>
+
+  <div class="theme-toggle">
+    <button onclick="toggleDarkMode()" id="themeToggle">🌙</button>
+  </div>
+
+  <div class="login-container">
+    <div class="brand">FaceMark Pro</div>
+    <h2>Faculty Login</h2>
+
+    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+      {% if messages %}
+        <div class="error">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" onsubmit="storeRememberMe()">
+      <div class="form-group">
+        <input type="text" name="faculty_name" id="faculty_name" placeholder="Username" required>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <span class="eye-icon" onclick="togglePassword()">👁️</span>
+      </div>
+      <div class="remember">
+        <input type="checkbox" id="rememberMe"> Remember Me
+      </div>
+      <input type="submit" value="Login">
+    </form>
+  </div>
+  <div class="fade-overlay" id="fadeOverlay"></div>
+
+  <div class="theme-toggle">
+    <div class="theme-switch" onclick="toggleDarkMode()">
+      <span class="icon sun">☀️</span>
+      <span class="icon moon">🌙</span>
+      <div class="toggle-circle" id="toggleCircle"></div>
+    </div>
+  </div>
+
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
